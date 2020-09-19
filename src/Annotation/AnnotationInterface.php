@@ -9,6 +9,7 @@ use Reinfi\DependencyInjection\Injection\InjectionInterface;
 /**
  * @package Reinfi\DependencyInjection\Annotation
  */
+#[Attribute]
 interface AnnotationInterface extends InjectionInterface
 {
 }
