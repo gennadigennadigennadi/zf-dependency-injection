@@ -26,8 +26,31 @@ final class AttributeExtractor implements ExtractorInterface
      */
     public function getPropertiesInjections(string $className): array
     {
-        return [];
+        $injections = [];
+
+        $reflection = new \ReflectionClass($className);
+
+        foreach ($reflection->getProperties() as $index => $property) {
+            $reflectionProperty = new \ReflectionProperty(
+                $className,
+                $property->getName()
+            );
+
+            $attributes = $reflectionProperty->getAttributes(
+                AnnotationInterface::class,
+                \ReflectionAttribute::IS_INSTANCEOF
+            );
+
+            $inject = isset($attributes[0]) ? $attributes[0]->newInstance() : null;
+
+            if ($inject) {
+                $injections[$index] = $inject;
+            }
+        }
+
+        return $injections;
     }
+
 
     /**
      * @param string $className
