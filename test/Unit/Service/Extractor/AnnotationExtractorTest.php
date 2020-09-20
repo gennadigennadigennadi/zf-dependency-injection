@@ -5,6 +5,7 @@ namespace Reinfi\DependencyInjection\Test\Unit\Service\Extractor;
 use Doctrine\Common\Annotations\AnnotationReader;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Reinfi\DependencyInjection\Annotation\AnnotationInterface;
 use Reinfi\DependencyInjection\Service\Extractor\AnnotationExtractor;
 use Reinfi\DependencyInjection\Test\Service\Service1;
@@ -16,6 +17,8 @@ use Reinfi\DependencyInjection\Test\Service\ServiceAnnotation;
  */
 class AnnotationExtractorTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

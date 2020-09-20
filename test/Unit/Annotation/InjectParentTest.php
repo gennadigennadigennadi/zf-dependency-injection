@@ -7,12 +7,15 @@ use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Annotation\InjectParent;
 use Reinfi\DependencyInjection\Service\InjectionService;
 use Laminas\ServiceManager\AbstractPluginManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Annotation
  */
 class InjectParentTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

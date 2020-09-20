@@ -7,12 +7,15 @@ use Prophecy\Argument;
 use Prophecy\Prophecy\MethodProphecy;
 use Reinfi\DependencyInjection\Service\CacheService;
 use Laminas\Cache\Storage\StorageInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service
  */
 class CacheServiceTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      *

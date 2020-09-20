@@ -8,12 +8,15 @@ use Reinfi\DependencyInjection\Config\ModuleConfig;
 use Reinfi\DependencyInjection\Service\Extractor\Factory\YamlExtractorFactory;
 use Reinfi\DependencyInjection\Service\Extractor\YamlExtractor;
 use Laminas\Config\Config;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service\Extractor\Factory
  */
 class YamlExtractorFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

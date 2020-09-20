@@ -9,12 +9,15 @@ use Reinfi\DependencyInjection\Service\Extractor\AnnotationExtractor;
 use Reinfi\DependencyInjection\Service\Extractor\Factory\ExtractorFactory;
 use Reinfi\DependencyInjection\Service\Extractor\YamlExtractor;
 use Laminas\Config\Config;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service\Extractor\Factory
  */
 class ExtractorFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

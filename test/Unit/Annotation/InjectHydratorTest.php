@@ -7,12 +7,15 @@ use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Annotation\InjectHydrator;
 use Reinfi\DependencyInjection\Test\Service\Service1;
 use Laminas\ServiceManager\AbstractPluginManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Annotation
  */
 class InjectHydratorTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      *

@@ -8,12 +8,15 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Annotation\InjectDoctrineRepository;
 use Laminas\ServiceManager\AbstractPluginManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Annotation
  */
 class InjectDoctrineRepositoryTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      *

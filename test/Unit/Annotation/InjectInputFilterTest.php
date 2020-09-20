@@ -7,12 +7,15 @@ use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Annotation\InjectInputFilter;
 use Reinfi\DependencyInjection\Test\Service\Service1;
 use Laminas\ServiceManager\AbstractPluginManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Annotation
  */
 class InjectInputFilterTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      *

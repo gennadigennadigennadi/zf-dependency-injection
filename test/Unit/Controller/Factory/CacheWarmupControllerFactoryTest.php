@@ -10,12 +10,15 @@ use Reinfi\DependencyInjection\Service\AutoWiring\ResolverService;
 use Reinfi\DependencyInjection\Service\CacheService;
 use Reinfi\DependencyInjection\Service\Extractor\ExtractorInterface;
 use Laminas\Mvc\Controller\ControllerManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Controller\Factory
  */
 class CacheWarmupControllerFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

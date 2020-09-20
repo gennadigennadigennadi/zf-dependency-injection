@@ -6,12 +6,15 @@ use PHPUnit\Framework\TestCase;
 use Reinfi\DependencyInjection\Exception\ConfigPathNotFoundException;
 use Reinfi\DependencyInjection\Service\ConfigService;
 use Laminas\Config\Config;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service
  */
 class ConfigServiceTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

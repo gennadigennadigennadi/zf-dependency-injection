@@ -13,12 +13,15 @@ use Reinfi\DependencyInjection\Test\Service\Service3;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Factory
  */
 class InjectionFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

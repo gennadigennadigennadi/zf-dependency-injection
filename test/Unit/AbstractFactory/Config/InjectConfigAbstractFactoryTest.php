@@ -6,12 +6,15 @@ use PHPUnit\Framework\TestCase;
 use Reinfi\DependencyInjection\AbstractFactory\Config\InjectConfigAbstractFactory;
 use Reinfi\DependencyInjection\Service\ConfigService;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\AbstractFactory\Config
  */
 class InjectConfigAbstractFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

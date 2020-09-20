@@ -8,12 +8,15 @@ use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Annotation\InjectConfig;
 use Reinfi\DependencyInjection\Service\ConfigService;
 use Laminas\ServiceManager\AbstractPluginManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Annotation
  */
 class InjectConfigTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */

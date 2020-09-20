@@ -8,12 +8,15 @@ use Reinfi\DependencyInjection\Exception\AutoWiringNotPossibleException;
 use Reinfi\DependencyInjection\Injection\AutoWiringPluginManager;
 use Reinfi\DependencyInjection\Test\Service\Service1;
 use Laminas\ServiceManager\AbstractPluginManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Injection
  */
 class AutoWiringPluginManagerTest extends TestCase
 {
+    use ProphecyTrait;
+    
     /**
      * @test
      */
