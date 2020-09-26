@@ -21,7 +21,7 @@ use Prophecy\PhpUnit\ProphecyTrait;
 class InjectionFactoryTest extends TestCase
 {
     use ProphecyTrait;
-    
+
     /**
      * @test
      */
@@ -42,7 +42,7 @@ class InjectionFactoryTest extends TestCase
         $instance = $factory->createService(
             $container->reveal(),
             Service1::class,
-                Service1::class
+            Service1::class
         );
 
         $this->assertInstanceOf(

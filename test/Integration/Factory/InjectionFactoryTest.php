@@ -2,6 +2,7 @@
 
 namespace Reinfi\DependencyInjection\Test\Integration\Factory;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Reinfi\DependencyInjection\Factory\InjectionFactory;
 use Reinfi\DependencyInjection\Test\Integration\AbstractIntegrationTest;
 use Reinfi\DependencyInjection\Service\Extractor\YamlExtractor;
@@ -14,6 +15,7 @@ use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\Stdlib\ArrayUtils;
 
+
 /**
  * @package Reinfi\DependencyInjection\Test\Integration\Factory
  *
@@ -21,6 +23,7 @@ use Laminas\Stdlib\ArrayUtils;
  */
 class InjectionFactoryTest extends AbstractIntegrationTest
 {
+    use ProphecyTrait;
     /**
      * @test
      */
@@ -74,7 +77,7 @@ class InjectionFactoryTest extends AbstractIntegrationTest
                     Service3::class => InjectionFactory::class,
                 ],
             ],
-          ]);
+        ]);
 
         $factory = new InjectionFactory();
 

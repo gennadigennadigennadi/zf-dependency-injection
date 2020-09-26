@@ -10,12 +10,14 @@ use Reinfi\DependencyInjection\Injection\AutoWiring;
 use Reinfi\DependencyInjection\Service\AutoWiring\Resolver\TranslatorResolver;
 use Laminas\I18n\Translator\Translator;
 use Laminas\I18n\Translator\TranslatorInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service\AutoWiring\Resolver
  */
 class TranslatorResolverTest extends TestCase
 {
+    use ProphecyTrait;
     /**
      * @test
      * @dataProvider containerHasCallsProvider
@@ -29,9 +31,9 @@ class TranslatorResolverTest extends TestCase
 
         foreach ($containerHasCalls as $serviceName => $result) {
             $container->addMethodProphecy(
-                (new MethodProphecy($container, 'has', [ Argument::exact($serviceName) ]))
-                ->willReturn($result)
-                ->shouldBeCalled()
+                (new MethodProphecy($container, 'has', [Argument::exact($serviceName)]))
+                    ->willReturn($result)
+                    ->shouldBeCalled()
             );
         }
 
@@ -59,7 +61,7 @@ class TranslatorResolverTest extends TestCase
 
         foreach ($containerHasCalls as $serviceName => $result) {
             $container->addMethodProphecy(
-                (new MethodProphecy($container, 'has', [ Argument::exact($serviceName) ]))
+                (new MethodProphecy($container, 'has', [Argument::exact($serviceName)]))
                     ->willReturn($result)
             );
         }

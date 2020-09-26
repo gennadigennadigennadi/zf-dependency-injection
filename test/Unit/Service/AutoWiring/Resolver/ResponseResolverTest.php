@@ -7,12 +7,14 @@ use Reinfi\DependencyInjection\Injection\AutoWiring;
 use Reinfi\DependencyInjection\Service\AutoWiring\Resolver\ResponseResolver;
 use Laminas\Http\Response;
 use Laminas\Stdlib\ResponseInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service\AutoWiring\Resolver
  */
 class ResponseResolverTest extends TestCase
 {
+    use ProphecyTrait;
     /**
      * @test
      */
@@ -22,7 +24,7 @@ class ResponseResolverTest extends TestCase
 
         $class = $this->prophesize(\ReflectionClass::class);
         $class->getName()->willReturn(Response::class);
-        $class->getInterfaceNames()->willReturn([ ResponseInterface::class ]);
+        $class->getInterfaceNames()->willReturn([ResponseInterface::class]);
         $parameter = $this->prophesize(\ReflectionParameter::class);
         $parameter->getClass()->willReturn($class->reveal());
 

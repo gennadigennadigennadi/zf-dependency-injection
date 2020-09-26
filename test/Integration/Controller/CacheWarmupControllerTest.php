@@ -3,6 +3,7 @@
 namespace Reinfi\DependencyInjection\Test\Integration\Controller;
 
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Reinfi\DependencyInjection\Controller\CacheWarmupController;
 use Reinfi\DependencyInjection\Test\Integration\AbstractIntegrationTest;
 use Reinfi\DependencyInjection\Service\AutoWiring\ResolverService;
@@ -17,6 +18,7 @@ use Laminas\Console\Adapter\AdapterInterface;
  */
 class CacheWarmupControllerTest extends AbstractIntegrationTest
 {
+    use ProphecyTrait;
     /**
      * @test
      */

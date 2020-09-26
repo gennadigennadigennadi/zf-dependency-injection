@@ -13,6 +13,8 @@ use Reinfi\DependencyInjection\Test\Service\ServiceBuildInTypeWithDefaultUsingCo
 use Reinfi\DependencyInjection\Test\Service\ServiceContainer;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
+use \Prophecy\PhpUnit\ProphecyTrait;
+
 
 /**
  * @package Reinfi\DependencyInjection\Test\Integration\Factory
@@ -21,6 +23,7 @@ use Laminas\ServiceManager\Exception\InvalidServiceException;
  */
 class AutoWiringFactoryTest extends AbstractIntegrationTest
 {
+    use ProphecyTrait;
     /**
      * @test
      */

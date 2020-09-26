@@ -5,6 +5,7 @@ namespace Reinfi\DependencyInjection\Test\Unit\Annotation;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Annotation\Inject;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Reinfi\DependencyInjection\Service\InjectionService;
 
 /**
@@ -12,6 +13,7 @@ use Reinfi\DependencyInjection\Service\InjectionService;
  */
 class InjectTest extends TestCase
 {
+    use ProphecyTrait;
     /**
      * @test
      */

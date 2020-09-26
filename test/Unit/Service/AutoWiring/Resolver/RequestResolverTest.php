@@ -3,16 +3,19 @@
 namespace Reinfi\DependencyInjection\Test\Unit\Service\AutoWiring\Resolver;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Reinfi\DependencyInjection\Injection\AutoWiring;
 use Reinfi\DependencyInjection\Service\AutoWiring\Resolver\RequestResolver;
 use Laminas\Http\Request;
 use Laminas\Stdlib\RequestInterface;
+
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service\AutoWiring\Resolver
  */
 class RequestResolverTest extends TestCase
 {
+    use ProphecyTrait;
     /**
      * @test
      */
@@ -22,7 +25,7 @@ class RequestResolverTest extends TestCase
 
         $class = $this->prophesize(\ReflectionClass::class);
         $class->getName()->willReturn(Request::class);
-        $class->getInterfaceNames()->willReturn([ RequestInterface::class ]);
+        $class->getInterfaceNames()->willReturn([RequestInterface::class]);
         $parameter = $this->prophesize(\ReflectionParameter::class);
         $parameter->getClass()->willReturn($class->reveal());
 

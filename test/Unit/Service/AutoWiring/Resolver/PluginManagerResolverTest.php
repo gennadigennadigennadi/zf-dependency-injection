@@ -3,6 +3,7 @@
 namespace Reinfi\DependencyInjection\Test\Unit\Service\AutoWiring\Resolver;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Injection\AutoWiringPluginManager;
 use Reinfi\DependencyInjection\Injection\InjectionInterface;
@@ -10,11 +11,13 @@ use Reinfi\DependencyInjection\Service\AutoWiring\Resolver\PluginManagerResolver
 use Reinfi\DependencyInjection\Service\Extractor\ExtractorInterface;
 use Reinfi\DependencyInjection\Test\Service\Service1;
 
+
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service\AutoWiring\Resolver
  */
 class PluginManagerResolverTest extends TestCase
 {
+    use ProphecyTrait;
     /**
      * @test
      *

@@ -3,6 +3,7 @@
 namespace Reinfi\DependencyInjection\Test\Unit;
 
 use PHPUnit\Framework\TestCase;
+use \Prophecy\PhpUnit\ProphecyTrait;
 use Reinfi\DependencyInjection\Module;
 use Laminas\Console\Adapter\AdapterInterface;
 
@@ -11,6 +12,8 @@ use Laminas\Console\Adapter\AdapterInterface;
  */
 class ModuleTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

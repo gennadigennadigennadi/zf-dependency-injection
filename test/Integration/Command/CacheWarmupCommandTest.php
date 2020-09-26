@@ -4,6 +4,7 @@ namespace Reinfi\DependencyInjection\Test\Integration\Command;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Reinfi\DependencyInjection\Annotation\Inject;
 use Reinfi\DependencyInjection\Annotation\InjectConfig;
 use Reinfi\DependencyInjection\Annotation\InjectConstant;
@@ -18,6 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CacheWarmupCommandTest extends TestCase
 {
+
+    use ProphecyTrait;
     /**
      * @inheritDoc
      */
