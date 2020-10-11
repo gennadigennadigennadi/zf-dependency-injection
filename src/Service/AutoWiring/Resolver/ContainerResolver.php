@@ -34,12 +34,12 @@ class ContainerResolver implements ResolverInterface
      */
     public function resolve(ReflectionParameter $parameter): ?InjectionInterface
     {
-        if ($parameter->getClass() === null) {
+        if (!$parameter->hasType()) {
             return null;
         }
 
-        if ($this->container->has($parameter->getClass()->getName())) {
-            return new AutoWiring($parameter->getClass()->getName());
+        if ($this->container->has($parameter->getType()->getName())) {
+            return new AutoWiring($parameter->getType()->getName());
         }
 
         return null;

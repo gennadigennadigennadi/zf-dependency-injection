@@ -29,12 +29,9 @@ class ContainerResolverTest extends TestCase
 
         $resolver = new ContainerResolver($container->reveal());
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->getName()->willReturn(Service1::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
+        $parameter = new ReflectionParameter(function (Service1 $service1){}, 'service1');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(InjectionInterface::class, $injection);
     }
@@ -50,12 +47,13 @@ class ContainerResolverTest extends TestCase
 
         $resolver = new ContainerResolver($container->reveal());
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->getName()->willReturn(Service1::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
+        $parameter = new ReflectionParameter(
+            function (Service1 $service1) {
+            },
+            'service1'
+        );
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $reflCass = new ReflectionClass($injection);
         $property = $reflCass->getProperty('serviceName');
@@ -78,12 +76,12 @@ class ContainerResolverTest extends TestCase
 
         $resolver = new ContainerResolver($container->reveal());
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->getName()->willReturn(Service1::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
+        $parameter = new ReflectionParameter(
+            function (Service1 $service1) {
+            }, 'service1'
+        );
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertNull($injection);
     }
@@ -97,10 +95,13 @@ class ContainerResolverTest extends TestCase
 
         $resolver = new ContainerResolver($container->reveal());
 
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn(null);
+        $parameter = new ReflectionParameter(
+            function ($noType) {
+            },
+            'noType'
+        );
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertNull($injection);
     }

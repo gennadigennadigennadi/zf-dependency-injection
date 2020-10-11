@@ -100,10 +100,14 @@ class ContainerInterfaceResolverTest extends TestCase
     {
         $resolver = new ContainerInterfaceResolver();
 
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn(null);
+        $parameter = new ReflectionParameter(
+            function ($noClass) {
+            },
+            'noClass'
+        );
 
-        $injection = $resolver->resolve($parameter->reveal());
+
+        $injection = $resolver->resolve($parameter);
 
         $this->assertNull($injection);
     }

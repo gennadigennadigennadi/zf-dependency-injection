@@ -21,18 +21,15 @@ class BuildInTypeWithDefaultResolverTest extends TestCase
      */
     public function itReturnsInjectionInterface()
     {
+        $reflectionParameter = new ReflectionParameter(
+            function (int $isBuiltin = 0) {
+            },
+            'isBuiltin'
+        );
+
         $resolver = new BuildInTypeWithDefaultResolver();
 
-        $type = $this->prophesize(ReflectionType::class);
-        $type->isBuiltin()->willReturn(true);
-
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->hasType()->willReturn(true);
-        $parameter->getType()->willReturn($type->reveal());
-        $parameter->isDefaultValueAvailable()->willReturn(true);
-        $parameter->getDefaultValue()->willReturn(0)->shouldBeCalled();
-
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($reflectionParameter);
 
         $this->assertInstanceOf(InjectionInterface::class, $injection);
     }
@@ -57,16 +54,14 @@ class BuildInTypeWithDefaultResolverTest extends TestCase
      */
     public function itReturnsNullIfNoBuildInType()
     {
+        $reflectionParameter = new ReflectionParameter(
+            function (NoBuildInType $noBuildInType) {},
+            'noBuildInType'
+        );
+
         $resolver = new BuildInTypeWithDefaultResolver();
 
-        $type = $this->prophesize(ReflectionType::class);
-        $type->isBuiltin()->willReturn(false);
-
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->hasType()->willReturn(true);
-        $parameter->getType()->willReturn($type->reveal());
-
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($reflectionParameter);
 
         $this->assertNull($injection, 'Should be null if parameter is not a buildin type');
     }
@@ -76,18 +71,15 @@ class BuildInTypeWithDefaultResolverTest extends TestCase
      */
     public function itReturnsNullIfNoDefaultValueAvailable()
     {
+        $reflectionParameter = new ReflectionParameter(
+            function (string $noDefault) {},
+            'noDefault'
+        );
+
         $resolver = new BuildInTypeWithDefaultResolver();
 
-        $type = $this->prophesize(ReflectionType::class);
-        $type->isBuiltin()->willReturn(true);
+        $injection = $resolver->resolve($reflectionParameter);
 
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->hasType()->willReturn(true);
-        $parameter->getType()->willReturn($type->reveal());
-        $parameter->isDefaultValueAvailable()->willReturn(false);
-
-        $injection = $resolver->resolve($parameter->reveal());
-
-        $this->assertNull($injection, 'Should be null if parameter is not a buildin type');
+        $this->assertNull($injection, 'Should be null if parameter has no default value');
     }
 }
