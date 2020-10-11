@@ -62,7 +62,7 @@ class YamlExtractorTest extends TestCase
 
         $injections = $extractor->getConstructorInjections(Service1::class);
 
-        var_dump($injections[0]->value);
+//        var_dump($injections[0]->value);
         $this->assertEquals(Service2::class, $injections[0]->value);
     }
 

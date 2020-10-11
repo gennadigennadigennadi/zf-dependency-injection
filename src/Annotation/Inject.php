@@ -7,7 +7,13 @@ namespace Reinfi\DependencyInjection\Annotation;
 use Attribute;
 use Psr\Container\ContainerInterface;
 
-#[Attribute]
+
+//#[Attribute]
+/**
+ * @package Reinfi\DependencyInjection\Annotation
+ *
+ * @Annotation
+ */
 final class Inject implements AnnotationInterface
 {
     /**

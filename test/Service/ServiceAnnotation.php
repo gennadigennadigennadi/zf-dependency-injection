@@ -2,6 +2,7 @@
 
 namespace Reinfi\DependencyInjection\Test\Service;
 
+
 use Reinfi\DependencyInjection\Annotation\Inject;
 use Reinfi\DependencyInjection\Annotation\InjectConfig;
 
