@@ -25,13 +25,10 @@ class ResponseResolverTest extends TestCase
     {
         $resolver = new ResponseResolver();
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->getName()->willReturn(Response::class);
-        $class->getInterfaceNames()->willReturn([ ResponseInterface::class ]);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
+        $parameter = new \ReflectionParameter(function (Response $response) {
+        }, 'response');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(AutoWiring::class, $injection);
     }
@@ -43,11 +40,10 @@ class ResponseResolverTest extends TestCase
     {
         $resolver = new ResponseResolver();
 
-        $class = new ReflectionClass(Response::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class);
+        $parameter = new ReflectionParameter(function (Response $response) {
+        }, 'response');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(AutoWiring::class, $injection);
     }
@@ -59,11 +55,10 @@ class ResponseResolverTest extends TestCase
     {
         $resolver = new ResponseResolver();
 
-        $class = new ReflectionClass(ResponseInterface::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class);
+        $parameter  = new ReflectionParameter(function (ResponseInterface $response) {
+        }, 'response');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(AutoWiring::class, $injection);
     }
@@ -78,11 +73,15 @@ class ResponseResolverTest extends TestCase
         $class = $this->prophesize(ReflectionClass::class);
         $class->getName()->willReturn('');
         $class->getInterfaceNames()->willReturn([]);
+
         $parameter = $this->prophesize(ReflectionParameter::class);
         $parameter->getClass()->willReturn($class->reveal());
 
+        $parameter = new ReflectionParameter(function ($class) {
+        }, 'class');
+
         $this->assertNull(
-            $resolver->resolve($parameter->reveal()),
+            $resolver->resolve($parameter),
             'return value should be null if not found'
         );
     }
@@ -94,11 +93,11 @@ class ResponseResolverTest extends TestCase
     {
         $resolver = new ResponseResolver();
 
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn(null);
+        $parameter = new ReflectionParameter(function ($classWithoutType) {
+        }, 'classWithoutType');
 
         $this->assertNull(
-            $resolver->resolve($parameter->reveal()),
+            $resolver->resolve($parameter),
             'return value should be null if not found'
         );
     }

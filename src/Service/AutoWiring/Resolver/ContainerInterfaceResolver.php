@@ -20,11 +20,12 @@ class ContainerInterfaceResolver implements ResolverInterface
      */
     public function resolve(ReflectionParameter $parameter): ?InjectionInterface
     {
-        if ($parameter->getClass() === null) {
+        if (!($parameter->getType() && !$parameter->getType()->isBuiltin())) {
             return null;
         }
 
-        $reflClass = $parameter->getClass();
+        $reflClass = new \ReflectionClass($parameter->getType()->getName());
+
         if (
             $reflClass->isInterface()
             && $reflClass->getName() === ContainerInterface::class

@@ -45,13 +45,13 @@ class PluginManagerResolver implements ResolverInterface
      */
     public function resolve(ReflectionParameter $parameter): ?InjectionInterface
     {
-        if ($parameter->getClass() === null) {
+        if (false === ($parameter->getType() && !$parameter->getType()->isBuiltin())) {
             return null;
         }
 
-        $reflectionClass = $parameter->getClass();
-        $serviceName = $reflectionClass->getName();
+        $reflectionClass = new \ReflectionClass($parameter->getType()->getName());
 
+        $serviceName = $reflectionClass->getName();
         $interfaceNames = $reflectionClass->getInterfaceNames();
 
         foreach (self::$pluginManagerMapping as $interfaceName => $pluginManager) {

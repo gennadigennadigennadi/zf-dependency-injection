@@ -19,11 +19,11 @@ class RequestResolver implements ResolverInterface
      */
     public function resolve(ReflectionParameter $parameter): ?InjectionInterface
     {
-        if ($parameter->getClass() === null) {
+        if (false === ($parameter->getType() && !$parameter->getType()->isBuiltin())) {
             return null;
         }
 
-        $reflectionClass = $parameter->getClass();
+        $reflectionClass = new \ReflectionClass($parameter->getType()->getName());
         $interfaceNames = $reflectionClass->getInterfaceNames();
 
         if (

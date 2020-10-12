@@ -26,13 +26,10 @@ class ContainerInterfaceResolverTest extends TestCase
     {
         $resolver = new ContainerInterfaceResolver();
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->isInterface()->willReturn(true);
-        $class->getName()->willReturn(ContainerInterface::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
+        $parameter = new ReflectionParameter(function (ContainerInterface $container) {
+        }, 'container');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(InjectionInterface::class, $injection);
     }
@@ -44,14 +41,10 @@ class ContainerInterfaceResolverTest extends TestCase
     {
         $resolver = new ContainerInterfaceResolver();
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->isInterface()->willReturn(false);
-        $class->getInterfaceNames()->willReturn([ContainerInterface::class]);
-        $class->getName()->willReturn(ServiceLocatorInterface::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
+        $parameter = new ReflectionParameter(function (ServiceLocatorInterface $serviceLocator) {
+        }, 'serviceLocator');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(InjectionInterface::class, $injection);
     }

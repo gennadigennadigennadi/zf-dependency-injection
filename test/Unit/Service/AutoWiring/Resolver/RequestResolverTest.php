@@ -25,13 +25,10 @@ class RequestResolverTest extends TestCase
     {
         $resolver = new RequestResolver();
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->getName()->willReturn(Request::class);
-        $class->getInterfaceNames()->willReturn([ RequestInterface::class ]);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
+        $parameter = new \ReflectionParameter(function (RequestInterface $request) {
+        }, 'request');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(AutoWiring::class, $injection);
     }
@@ -43,11 +40,10 @@ class RequestResolverTest extends TestCase
     {
         $resolver = new RequestResolver();
 
-        $class = new ReflectionClass(Request::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class);
+        $parameter = new \ReflectionParameter(function (Request $request) {
+        }, 'request');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(AutoWiring::class, $injection);
     }
@@ -59,11 +55,10 @@ class RequestResolverTest extends TestCase
     {
         $resolver = new RequestResolver();
 
-        $class = new ReflectionClass(RequestInterface::class);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class);
+        $parameter = new \ReflectionParameter(function (RequestInterface $request) {
+        }, 'request');
 
-        $injection = $resolver->resolve($parameter->reveal());
+        $injection = $resolver->resolve($parameter);
 
         $this->assertInstanceOf(AutoWiring::class, $injection);
     }
