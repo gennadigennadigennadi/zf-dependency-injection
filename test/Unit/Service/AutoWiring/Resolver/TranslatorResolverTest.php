@@ -34,9 +34,9 @@ class TranslatorResolverTest extends TestCase
 
         foreach ($containerHasCalls as $serviceName => $result) {
             $container->addMethodProphecy(
-                (new MethodProphecy($container, 'has', [ Argument::exact($serviceName) ]))
-                ->willReturn($result)
-                ->shouldBeCalled()
+                (new MethodProphecy($container, 'has', [Argument::exact($serviceName)]))
+                    ->willReturn($result)
+                    ->shouldBeCalled()
             );
         }
 
@@ -64,7 +64,7 @@ class TranslatorResolverTest extends TestCase
 
         foreach ($containerHasCalls as $serviceName => $result) {
             $container->addMethodProphecy(
-                (new MethodProphecy($container, 'has', [ Argument::exact($serviceName) ]))
+                (new MethodProphecy($container, 'has', [Argument::exact($serviceName)]))
                     ->willReturn($result)
             );
         }
@@ -152,11 +152,13 @@ class TranslatorResolverTest extends TestCase
 
         $resolver = new TranslatorResolver($container->reveal());
 
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn(null);
+        /* $parameter = $this->prophesize(ReflectionParameter::class); */
+        /* $parameter->getClass()->willReturn(null); */
+        $parameter = new \ReflectionParameter(function ($withoutClass) {
+        }, 'withoutClass');
 
         $this->assertNull(
-            $resolver->resolve($parameter->reveal()),
+            $resolver->resolve($parameter),
             'return value should be null if not found'
         );
     }

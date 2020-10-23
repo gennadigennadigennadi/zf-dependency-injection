@@ -38,6 +38,7 @@ class ContainerInterfaceResolver implements ResolverInterface
         }
 
         $interfaceNames = $reflClass->getInterfaceNames();
+
         if (in_array(ContainerInterface::class, $interfaceNames)) {
             return new AutoWiringContainer();
         }
