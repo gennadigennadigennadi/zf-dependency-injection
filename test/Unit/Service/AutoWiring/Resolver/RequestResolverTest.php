@@ -70,14 +70,10 @@ class RequestResolverTest extends TestCase
     {
         $resolver = new RequestResolver();
 
-        $class = $this->prophesize(ReflectionClass::class);
-        $class->getName()->willReturn('');
-        $class->getInterfaceNames()->willReturn([]);
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn($class->reveal());
-
+        $parameter = new ReflectionParameter(function (\stdClass $noRequest) {
+        }, 'noRequest');
         $this->assertNull(
-            $resolver->resolve($parameter->reveal()),
+            $resolver->resolve($parameter),
             'return value should be null if not found'
         );
     }
@@ -89,11 +85,11 @@ class RequestResolverTest extends TestCase
     {
         $resolver = new RequestResolver();
 
-        $parameter = $this->prophesize(ReflectionParameter::class);
-        $parameter->getClass()->willReturn(null);
+        $parameter = new ReflectionParameter(function ($noClass) {
+        }, 'noClass');
 
         $this->assertNull(
-            $resolver->resolve($parameter->reveal()),
+            $resolver->resolve($parameter),
             'return value should be null if not found'
         );
     }

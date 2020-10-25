@@ -152,8 +152,6 @@ class TranslatorResolverTest extends TestCase
 
         $resolver = new TranslatorResolver($container->reveal());
 
-        /* $parameter = $this->prophesize(ReflectionParameter::class); */
-        /* $parameter->getClass()->willReturn(null); */
         $parameter = new \ReflectionParameter(function ($withoutClass) {
         }, 'withoutClass');
 
