@@ -2,17 +2,18 @@
 
 namespace Reinfi\DependencyInjection\Test\Unit\Service\Extractor;
 
-use Doctrine\Common\Annotations\AnnotationReader;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use ReflectionMethod;
+use Prophecy\Argument;
 use ReflectionProperty;
-use Reinfi\DependencyInjection\Annotation\AnnotationInterface;
-use Reinfi\DependencyInjection\Service\Extractor\AnnotationExtractor;
+use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Reinfi\DependencyInjection\Test\Service\Service1;
 use Reinfi\DependencyInjection\Test\Service\Service2;
+use Reinfi\DependencyInjection\Test\Service\ServiceAttribute;
+use Reinfi\DependencyInjection\Annotation\AnnotationInterface;
 use Reinfi\DependencyInjection\Test\Service\ServiceAnnotation;
+use Reinfi\DependencyInjection\Service\Extractor\AnnotationExtractor;
 
 /**
  * @package Reinfi\DependencyInjection\Test\Unit\Service\Extractor
@@ -38,6 +39,22 @@ class AnnotationExtractorTest extends TestCase
         $extractor = new AnnotationExtractor($reader->reveal());
 
         $injections = $extractor->getPropertiesInjections(ServiceAnnotation::class);
+
+        $this->assertCount(3, $injections);
+        $this->assertContainsOnlyInstancesOf(AnnotationInterface::class, $injections);
+    }
+
+    /**
+     * @test
+     * @requires PHP >= 8.0
+     */
+    public function itResolvesPropertyAttributes()
+    {
+        $reader = $this->prophesize(AnnotationReader::class);
+
+        $extractor = new AnnotationExtractor($reader->reveal());
+
+        $injections = $extractor->getPropertiesInjections(ServiceAttribute::class);
 
         $this->assertCount(3, $injections);
         $this->assertContainsOnlyInstancesOf(AnnotationInterface::class, $injections);
