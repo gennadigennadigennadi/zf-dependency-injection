@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Reinfi\DependencyInjection\Annotation;
 
+use Attribute;
 use Laminas\Config\Config;
 use Psr\Container\ContainerInterface;
 use Reinfi\DependencyInjection\Service\ConfigService;
+
+#[Attribute(Attribute::TARGET_PROPERTY|Attribute::TARGET_METHOD)]
 
 /**
  * @package Reinfi\DependencyInjection\Annotation
@@ -29,13 +32,10 @@ final class InjectConfig extends AbstractAnnotation
     /**
      * @param array $values
      */
-    public function __construct(array $values)
+    public function __construct(array $values = [], string $configPath = '', bool $asArray = false)
     {
-        if (isset($values['asArray'])) {
-            $this->asArray = (bool) $values['asArray'];
-        }
-
-        $this->configPath = $values['value'];
+        $this->asArray = (bool) ($values['asArray'] ?? $asArray);
+        $this->configPath = $values['value'] ?? $configPath;
     }
     /**
      * @inheritDoc
